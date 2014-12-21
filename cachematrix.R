@@ -4,17 +4,17 @@
 ## Write a short comment describing this function
 
 makeCacheMatrix <- function(x = matrix()) {
-    xn <- NULL
-    set<- function(y){
+    xn <- NULL                                  ## xn is the inverse of matrix
+    set<- function(y){                          ## set value of matrix "x"
         if(nrow(y)==ncol(y)){
             x <<- y
             xn<<- NULL
         }else{print("Please check you matrix again.")}
     }
-    get <- function() x
-    setSolve <- function(yn) xn<<- yn
-    getSolve <- function() xn
-    list(set = set, get = get,
+    get <- function() x                         ## get values of "x"
+    setSolve <- function(yn) xn<<- yn           ## set inverse matrix of matrix "x"
+    getSolve <- function() xn                   ## get inverse matrix of matrix "x"
+    list(set = set, get = get,                  ## return value of "x"
          setSolve = setSolve,
          getSolve = getSolve)
 }
@@ -24,13 +24,13 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
-    xn<- x$getSolve()
-    if(!is.null(xn)){
+        xn<- x$getSolve()
+        if(!is.null(xn)){                       ## find if the inverse martix exist
         message("Getting inverse matrix...")
         return(xn)
     }
-    ninverse <- x$get()
-    xn <- solve(ninverse)
+        ninverse <- x$get()                     ## declare the value of non-inverse matrix value
+        xn <- solve(ninverse)                   ## solve
     x$setSolve(xn)
-    xn
+    xn                                          ## return
 }
